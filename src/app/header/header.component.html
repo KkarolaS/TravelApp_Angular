@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="../../assets/photos/logo.jpg" alt="logo" class="logo" />
+      <a routerLink="/" class="navbar-brand">WanderlustApp</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarSupportedContent">
+        <li class="nav-item">
+          <a
+            routerLink="/"
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/travels"
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >My Travels</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/shopping-list"
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Shopping List</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/flies"
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Find Flies</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/maps"
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Maps</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

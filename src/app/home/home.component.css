@@ -1,0 +1,18 @@
+.home-container {
+  color: white;
+  padding-top: 20px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.logo {
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+  -moz-filter: invert(100%);
+}
+.subtitle {
+  margin-left: 100px;
+}

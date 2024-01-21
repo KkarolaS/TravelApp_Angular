@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelsService } from '../../shared/travels.service';
 import { Travel } from '../travel.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-travels-list',
@@ -10,9 +11,17 @@ import { Travel } from '../travel.model';
 export class TravelsListComponent implements OnInit {
   travels: Travel[] = [];
 
-  constructor(private travelsService: TravelsService) {}
+  constructor(
+    private travelsService: TravelsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.travels = this.travelsService.getTravels();
+  }
+
+  onAddTravel() {
+    this.router.navigate(['/'], { relativeTo: this.route });
   }
 }

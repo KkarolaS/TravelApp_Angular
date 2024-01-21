@@ -1,6 +1,9 @@
 <div class="row">
-  <div class="col-xs-12">
-    <h3>Your travles projects</h3>
+  <div class="col-xs-12 list-travels-wrapper">
+    <h3 class="travel-list-title">Your travels projects</h3>
+    <button class="btn btn-primary" (click)="onAddTravel()">
+      Add a new travel
+    </button>
     <div class="list-group">
       <app-travel-item
         *ngFor="let travel of travels; let i = index"

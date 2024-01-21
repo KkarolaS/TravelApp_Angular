@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelsService } from '../shared/travels.service';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Travel } from '../travels/travel.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,13 @@ import { FormGroup } from '@angular/forms';
 export class HomeComponent implements OnInit {
   addingParticipant: boolean = false;
   addTravelForm: FormGroup;
+  participantAdded: boolean = false;
 
-  constructor(private travelsService: TravelsService) {}
+  constructor(
+    private travelsService: TravelsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   onAddParticipant() {
     this.addingParticipant = true;
@@ -22,6 +29,25 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addTravelForm = new FormGroup({});
+    this.addTravelForm = new FormGroup({
+      travelName: new FormControl(null, Validators.required),
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, [Validators.required]),
+      travelDescription: new FormControl(null, Validators.required),
+      imgUrl: new FormControl(null),
+    });
+  }
+
+  onSubmit() {
+    const newTravel = new Travel(
+      this.addTravelForm.value['travelName'],
+      this.addTravelForm.value['startDate'],
+      this.addTravelForm.value['endDate'],
+      this.addTravelForm.value['travelDescription'],
+      this.addTravelForm.value['imgUrl'],
+      this.addTravelForm.value['participants']
+    );
+    this.travelsService.addTravel(newTravel);
+    this.router.navigate(['/travels'], { relativeTo: this.route });
   }
 }

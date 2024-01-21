@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h3>A new Travel</h3>
-      <form>
+      <form [formGroup]="addTravelForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input
@@ -20,6 +20,8 @@
             id="name"
             class="form-control"
             placeholder="Add a travel name"
+            formControlName="travelName"
+            required
           />
         </div>
         <div class="input-group mb-3">
@@ -29,8 +31,16 @@
             id="date"
             aria-label="Start date"
             class="form-control"
+            formControlName="startDate"
+            required
           />
-          <input type="date" aria-label="End date" class="form-control" />
+          <input
+            type="date"
+            aria-label="End date"
+            class="form-control"
+            formControlName="endDate"
+            required
+          />
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
@@ -40,6 +50,8 @@
             id="description"
             class="form-control"
             placeholder="Add a travel description"
+            formControlName="travelDescription"
+            required
           ></textarea>
         </div>
         <div class="mb-3">
@@ -49,6 +61,7 @@
             id="imgPath"
             class="form-control"
             placeholder="Add a photo url"
+            formControlName="imgUrl"
           />
         </div>
         <div class="mb-3">
@@ -61,7 +74,11 @@
             Add participant
           </button>
 
-          <div class="mb-3" *ngIf="addingParticipant">
+          <div
+            class="mb-3"
+            *ngIf="addingParticipant"
+            formArrayName="participants"
+          >
             <hr />
             <label for="participant-name" class="form-label"
               >Participant name</label
@@ -86,13 +103,19 @@
           </div>
           <hr />
         </div>
-        <div class="mb-3" *ngIf="">
+        <div class="mb-3" *ngIf="participantAdded">
           <h5>Participats list:</h5>
           <ul class="list-group">
             <li class="list-group-item"></li>
           </ul>
         </div>
-        <button type="submit" class="btn btn-success">Save</button>
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!addTravelForm.valid"
+        >
+          Save
+        </button>
       </form>
     </div>
   </div>

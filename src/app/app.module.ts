@@ -11,6 +11,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+import { TravelsService } from './shared/travels.service';
+import { TravelsListComponent } from './travels/travels-list/travels-list.component';
+import { TravelDetailsComponent } from './travels/travel-details/travel-details.component';
+import { TravelItemComponent } from './travels/travels-list/travel-item/travel-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,9 +27,12 @@ import { AppRoutingModule } from './app-routing.module';
     MapComponent,
     HeaderComponent,
     FooterComponent,
+    TravelsListComponent,
+    TravelDetailsComponent,
+    TravelItemComponent,
   ],
-  imports: [BrowserModule, NgbModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, NgbModule, AppRoutingModule, ReactiveFormsModule],
+  providers: [TravelsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

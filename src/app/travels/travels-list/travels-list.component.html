@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h3>Your travles projects</h3>
+    <div class="list-group">
+      <app-travel-item
+        *ngFor="let travel of travels; let i = index"
+        [travel]="travel"
+        [index]="i"
+      ></app-travel-item>
+    </div>
+  </div>
+</div>

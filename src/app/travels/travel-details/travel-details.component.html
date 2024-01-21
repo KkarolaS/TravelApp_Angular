@@ -1,0 +1,39 @@
+<article>
+  <div class="container details-wrapper">
+    <div class="row">
+      <div class="col-xs-12">
+        <section>
+          <img [src]="travel.imageUrl" alt="" />
+        </section>
+        <section>
+          <h2>{{ travel.name }}</h2>
+          <p></p>
+        </section>
+        <hr />
+        <section>
+          <p>{{ travel.description }}</p>
+        </section>
+        <section>
+          <h5>Participants</h5>
+          <ol class="list-group list-group-numbered">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-start"
+              *ngFor="let participant of travel.participants"
+            >
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">
+                  {{ participant.name }} {{ participant.surname }}
+                </div>
+                {{ participant.email }}
+              </div>
+              <div class="button-group">
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">X</button>
+              </div>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
+</article>

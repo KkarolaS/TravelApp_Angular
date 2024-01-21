@@ -1,0 +1,26 @@
+<a
+  class="list-group-item"
+  [routerLink]="[index, travel.name]"
+  routerLinkActive="active"
+  style="cursor: pointer"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ travel.name }}</h4>
+    <p class="list-group-item-text">
+      {{ travel.dateStart }} - {{ travel.dateEnd }}
+    </p>
+    <p class="list-group-item-text">
+      {{ travel.description }}
+    </p>
+  </div>
+  <span class="pull-right">
+    <img
+      [src]="travel.imageUrl"
+      alt="{{ travel.name }}"
+      class="img-responsive"
+      style="max-height: 100px"
+    />
+  </span>
+</a>
+
+<!-- dodać pipe aby skrócić description -->

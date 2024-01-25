@@ -14,36 +14,38 @@
           <p>{{ travel.description }}</p>
         </section>
         <section>
-          <h5>Participants</h5>
-          <ol class="list-group list-group-numbered">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-start"
-              *ngFor="let participant of travel.participants; let i = index"
-            >
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">
-                  {{ participant.name }} {{ participant.surname }}
+          <div *ngIf="!participantsEmpty">
+            <h5>Participants</h5>
+            <ol class="list-group list-group-numbered">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+                *ngFor="let participant of travel.participants; let i = index"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">
+                    {{ participant.name }} {{ participant.surname }}
+                  </div>
+                  {{ participant.email }}
                 </div>
-                {{ participant.email }}
-              </div>
-              <div class="button-group">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="onParticipnatEdit(i)"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="onParticipantDelete(i)"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          </ol>
+                <div class="button-group">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onParticipnatEdit(i)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="onParticipantDelete(i)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            </ol>
+          </div>
           <button class="btn btn-primary" (click)="onAddingParticipant()">
             Add Participant
           </button>

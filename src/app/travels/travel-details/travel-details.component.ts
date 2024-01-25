@@ -16,6 +16,7 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
   editingParticipants: boolean = false;
   editMode: boolean = false;
   editingParticipantId: number;
+  participantsEmpty: boolean = true;
 
   participantForm: FormGroup;
 
@@ -30,6 +31,12 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       this.travel = this.travelsService.getTravel(params['id']);
     });
+
+    if (this.travel.participants.length === 0) {
+      this.participantsEmpty = true;
+    } else {
+      this.participantsEmpty = false;
+    }
 
     this.participantForm = new FormGroup({
       name: new FormControl(null, Validators.required),
@@ -79,6 +86,7 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
     this.participantForm.reset();
     this.editingParticipants = false;
     this.editMode = false;
+    this.participantsEmpty = false;
   }
 
   ngOnDestroy(): void {

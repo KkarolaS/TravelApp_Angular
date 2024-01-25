@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelsService } from '../shared/travels.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Travel } from '../travels/travel.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,7 +12,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   addingParticipant: boolean = false;
   addTravelForm: FormGroup;
-  participantAdded: boolean = false;
 
   constructor(
     private travelsService: TravelsService,
@@ -20,21 +19,14 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  onAddParticipant() {
-    this.addingParticipant = true;
-  }
-
-  onSaveParticipant() {
-    this.addingParticipant = false;
-  }
-
   ngOnInit(): void {
     this.addTravelForm = new FormGroup({
       travelName: new FormControl(null, Validators.required),
       startDate: new FormControl(null, Validators.required),
-      endDate: new FormControl(null, [Validators.required]),
+      endDate: new FormControl(null, Validators.required),
       travelDescription: new FormControl(null, Validators.required),
       imgUrl: new FormControl(null),
+      participants: new FormArray([]),
     });
   }
 
@@ -49,5 +41,24 @@ export class HomeComponent implements OnInit {
     );
     this.travelsService.addTravel(newTravel);
     this.router.navigate(['/travels'], { relativeTo: this.route });
+  }
+
+  onAddParticipant() {
+    this.addingParticipant = true;
+    (<FormArray>this.addTravelForm.get('participants')).push(
+      new FormGroup({
+        name: new FormControl('Ada'),
+        surname: new FormControl(null),
+        email: new FormControl(null),
+      })
+    );
+  }
+
+  onDeleteParticipant(index: number) {
+    (<FormArray>this.addTravelForm.get('participants')).removeAt(index);
+  }
+
+  get controls() {
+    return (<FormArray>this.addTravelForm.get('participants')).controls;
   }
 }

@@ -6,6 +6,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { FliesComponent } from './flies/flies.component';
 import { MapComponent } from './map/map.component';
 import { TravelDetailsComponent } from './travels/travel-details/travel-details.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: 'flies', component: FliesComponent },
   { path: 'maps', component: MapComponent },
+  { path: 'calendar', component: CalendarComponent },
 ];
 
 @NgModule({

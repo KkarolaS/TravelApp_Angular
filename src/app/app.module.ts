@@ -16,6 +16,7 @@ import { TravelsListComponent } from './travels/travels-list/travels-list.compon
 import { TravelDetailsComponent } from './travels/travel-details/travel-details.component';
 import { TravelItemComponent } from './travels/travels-list/travel-item/travel-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TravelsListComponent,
     TravelDetailsComponent,
     TravelItemComponent,
+    CalendarComponent,
   ],
   imports: [BrowserModule, NgbModule, AppRoutingModule, ReactiveFormsModule],
   providers: [TravelsService],

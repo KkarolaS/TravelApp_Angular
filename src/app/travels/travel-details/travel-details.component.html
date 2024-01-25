@@ -18,7 +18,7 @@
           <ol class="list-group list-group-numbered">
             <li
               class="list-group-item d-flex justify-content-between align-items-start"
-              *ngFor="let participant of travel.participants"
+              *ngFor="let participant of travel.participants; let i = index"
             >
               <div class="ms-2 me-auto">
                 <div class="fw-bold">
@@ -27,12 +27,69 @@
                 {{ participant.email }}
               </div>
               <div class="button-group">
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">X</button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onParticipnatEdit(i)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="onParticipantDelete(i)"
+                >
+                  Delete
+                </button>
               </div>
             </li>
           </ol>
-          <button class="btn btn-primary">Add Participant</button>
+          <button class="btn btn-primary" (click)="onAddingParticipant()">
+            Add Participant
+          </button>
+        </section>
+        <section *ngIf="editingParticipants">
+          <hr />
+          <span>Participant data</span>
+          <form
+            [formGroup]="participantForm"
+            (ngSubmit)="onParticipantSubmit()"
+          >
+            <div class="input-group mb-3">
+              <span class="input-group-text">Name and surname</span>
+              <input
+                type="text"
+                aria-label="Name"
+                class="form-control"
+                formControlName="name"
+              />
+              <input
+                type="text"
+                aria-label="Surname"
+                class="form-control"
+                formControlName="surname"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Email</span>
+              <input
+                type="email"
+                aria-label="Email"
+                class="form-control"
+                formControlName="email"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="!participantForm.valid"
+            >
+              Save
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onCancel()">
+              Cancel
+            </button>
+          </form>
         </section>
       </div>
     </div>

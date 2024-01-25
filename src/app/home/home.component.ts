@@ -47,9 +47,9 @@ export class HomeComponent implements OnInit {
     this.addingParticipant = true;
     (<FormArray>this.addTravelForm.get('participants')).push(
       new FormGroup({
-        name: new FormControl('Ada'),
-        surname: new FormControl(null),
-        email: new FormControl(null),
+        name: new FormControl(null, Validators.required),
+        surname: new FormControl(null, Validators.required),
+        email: new FormControl(null, [Validators.required, Validators.email]),
       })
     );
   }

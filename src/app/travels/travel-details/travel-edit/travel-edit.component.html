@@ -1,1 +1,59 @@
-<p>travel-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <h3>Edit your travel</h3>
+    <form [formGroup]="editTravelForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          placeholder="Add a travel name"
+          formControlName="travelName"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Start and end date</span>
+        <input
+          type="date"
+          id="date"
+          aria-label="Start date"
+          class="form-control"
+          formControlName="startDate"
+        />
+        <input
+          type="date"
+          aria-label="End date"
+          class="form-control"
+          formControlName="endDate"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          type="text"
+          rows="4"
+          id="description"
+          class="form-control"
+          placeholder="Add a travel description"
+          formControlName="travelDescription"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="imgPath" class="form-label">Image url</label>
+        <input
+          type="text"
+          id="imgPath"
+          class="form-control"
+          placeholder="Add a photo url"
+          formControlName="imgUrl"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-success">Save changes</button>
+      <button type="button" class="btn btn-danger" (click)="onCancel()">
+        Cancel
+      </button>
+    </form>
+  </div>
+</div>

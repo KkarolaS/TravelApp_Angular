@@ -36,7 +36,9 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
     this.onParticipantInit();
   }
 
-  onTravelEdit() {}
+  onTravelEdit() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
 
   onTravelDelete() {
     this.travelsService.deleteTravel(this.travelId);

@@ -2,8 +2,12 @@
   <div class="container details-wrapper">
     <div class="row">
       <div class="col-xs-12">
-        <section>
-          <img [src]="travel.imageUrl" alt="" />
+        <section class="travelSection">
+          <img
+            class="travelDetailPhoto"
+            [src]="travel.imageUrl"
+            alt="travel place"
+          />
         </section>
         <section>
           <h2>{{ travel.name }}</h2>

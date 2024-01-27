@@ -15,7 +15,7 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
   editingParticipants: boolean = false;
   editMode: boolean = false;
-  editingParticipantId: number;
+  editingParticipantId;
   participantsEmpty: boolean = true;
 
   participantForm: FormGroup;

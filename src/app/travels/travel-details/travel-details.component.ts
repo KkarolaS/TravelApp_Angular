@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Travel } from '../travel.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TravelsService } from '../../shared/travels.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,26 +12,38 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class TravelDetailsComponent implements OnInit, OnDestroy {
   travel: Travel;
+  travelId: number;
   paramsSubscription: Subscription;
   editingParticipants: boolean = false;
   editMode: boolean = false;
-  editingParticipantId;
+  editingParticipantId: number;
   participantsEmpty: boolean = true;
 
   participantForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private travelsService: TravelsService
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.travel = this.travelsService.getTravel(id);
+    this.travelId = +this.route.snapshot.params['id'];
+    this.travel = this.travelsService.getTravel(this.travelId);
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      this.travel = this.travelsService.getTravel(params['id']);
+      this.travel = this.travelsService.getTravel(+params['id']);
     });
+    this.onParticipantInit();
+  }
 
+  onTravelEdit() {}
+
+  onTravelDelete() {
+    this.travelsService.deleteTravel(this.travelId);
+    this.router.navigate(['../travels']);
+  }
+
+  private onParticipantInit() {
     if (this.travel.participants.length === 0) {
       this.participantsEmpty = true;
     } else {

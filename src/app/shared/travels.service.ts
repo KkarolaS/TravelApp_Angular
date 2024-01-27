@@ -1,7 +1,10 @@
+import { Subject } from 'rxjs';
 import { Participant } from '../travels/participant.model';
 import { Travel } from '../travels/travel.model';
 
 export class TravelsService {
+  travelsChanged = new Subject<Travel[]>();
+
   travels: Travel[] = [
     new Travel(
       'Barcelona',
@@ -37,5 +40,14 @@ export class TravelsService {
 
   addTravel(travel: Travel) {
     this.travels.push(travel);
+  }
+
+  deleteTravel(index: number) {
+    this.travels = this.travels.filter((item, id) => {
+      return id !== index;
+    });
+    console.log(this.travels);
+
+    this.travelsChanged.next(this.travels.slice());
   }
 }

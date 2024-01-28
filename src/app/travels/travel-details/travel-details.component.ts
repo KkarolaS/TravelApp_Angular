@@ -30,10 +30,11 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.travelId = +this.route.snapshot.params['id'];
     this.travel = this.travelsService.getTravel(this.travelId);
+
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       this.travel = this.travelsService.getTravel(+params['id']);
     });
-    this.onParticipantInit();
+    this.onParticipantsInit();
   }
 
   onTravelEdit() {
@@ -45,7 +46,7 @@ export class TravelDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['../travels']);
   }
 
-  private onParticipantInit() {
+  private onParticipantsInit() {
     if (this.travel.participants.length === 0) {
       this.participantsEmpty = true;
     } else {

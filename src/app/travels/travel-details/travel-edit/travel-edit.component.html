@@ -49,7 +49,13 @@
           formControlName="imgUrl"
         />
       </div>
-      <button type="submit" class="btn btn-success">Save changes</button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="editTravelForm.invalid"
+      >
+        Save changes
+      </button>
       <button type="button" class="btn btn-danger" (click)="onCancel()">
         Cancel
       </button>

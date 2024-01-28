@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Travel } from '../../travel.model';
 import { TravelsService } from '../../../shared/travels.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -34,20 +34,20 @@ export class TravelEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const newParticipants: Participant[] = [];
     const newTravel = new Travel(
       this.editTravelForm.value['travelName'],
       this.editTravelForm.value['startDate'],
       this.editTravelForm.value['endDate'],
       this.editTravelForm.value['travelDescription'],
       this.editTravelForm.value['imgUrl'],
-      newParticipants
+      this.travel.participants
     );
     this.travelsService.changeTravel(this.travelId, newTravel);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onCancel() {
-    this.router.navigate(['../travels']);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {
@@ -55,10 +55,13 @@ export class TravelEditComponent implements OnInit, OnDestroy {
   }
   private travelInit() {
     this.editTravelForm = new FormGroup({
-      travelName: new FormControl(this.travel.name),
-      startDate: new FormControl(this.travel.dateStart),
-      endDate: new FormControl(this.travel.dateEnd),
-      travelDescription: new FormControl(this.travel.description),
+      travelName: new FormControl(this.travel.name, Validators.required),
+      startDate: new FormControl(this.travel.dateStart, Validators.required),
+      endDate: new FormControl(this.travel.dateEnd, Validators.required),
+      travelDescription: new FormControl(
+        this.travel.description,
+        Validators.required
+      ),
       imgUrl: new FormControl(this.travel.imageUrl),
     });
   }

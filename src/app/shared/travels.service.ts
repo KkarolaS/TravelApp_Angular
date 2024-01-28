@@ -8,8 +8,8 @@ export class TravelsService {
   travels: Travel[] = [
     new Travel(
       'Barcelona',
-      '12.02.2023',
-      '16.02.2023',
+      '2023-02-12',
+      '2023-01-16',
       '4 days trip to visit escape rooms in Barcelona',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg1qAliPBVb0bLEovlcRKJ-ZUiSpGdPVtZMw&usqp=CAU',
       [
@@ -19,8 +19,8 @@ export class TravelsService {
     ),
     new Travel(
       'Berlin',
-      '22.04.2023',
-      '25.04.2023',
+      '2023-04-22',
+      '2023-04-25',
       '3 days trip to visit museums in Berlin',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbMey6HB_ggd0M_E7n3KXxtHgrJpIimp1Tog&usqp=CAU',
       [
@@ -42,12 +42,15 @@ export class TravelsService {
     this.travels.push(travel);
   }
 
+  changeTravel(index: number, travel: Travel) {
+    this.travels[index] = travel;
+    this.travelsChanged.next(this.travels.slice());
+  }
+
   deleteTravel(index: number) {
     this.travels = this.travels.filter((item, id) => {
       return id !== index;
     });
-    console.log(this.travels);
-
     this.travelsChanged.next(this.travels.slice());
   }
 }

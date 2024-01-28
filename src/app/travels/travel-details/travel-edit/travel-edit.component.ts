@@ -4,6 +4,7 @@ import { Travel } from '../../travel.model';
 import { TravelsService } from '../../../shared/travels.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Participant } from '../../participant.model';
 
 @Component({
   selector: 'app-travel-edit',
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class TravelEditComponent implements OnInit, OnDestroy {
   editTravelForm: FormGroup;
   travel: Travel;
+  travelId: number;
   paramsSubsc: Subscription;
 
   constructor(
@@ -22,8 +24,8 @@ export class TravelEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.params['id'];
-    this.travel = this.travelsService.getTravel(id);
+    this.travelId = +this.route.snapshot.params['id'];
+    this.travel = this.travelsService.getTravel(this.travelId);
     this.paramsSubsc = this.route.params.subscribe((params: Params) => {
       this.travel = this.travelsService.getTravel(+params['id']);
     });
@@ -31,7 +33,18 @@ export class TravelEditComponent implements OnInit, OnDestroy {
     this.travelInit();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    const newParticipants: Participant[] = [];
+    const newTravel = new Travel(
+      this.editTravelForm.value['travelName'],
+      this.editTravelForm.value['startDate'],
+      this.editTravelForm.value['endDate'],
+      this.editTravelForm.value['travelDescription'],
+      this.editTravelForm.value['imgUrl'],
+      newParticipants
+    );
+    this.travelsService.changeTravel(this.travelId, newTravel);
+  }
 
   onCancel() {
     this.router.navigate(['../travels']);
